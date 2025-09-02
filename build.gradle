@@ -1,0 +1,51 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'java'
+    id 'application'
+}
+
+mainClassName = 'gadgetinspector.GadgetInspector'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation "org.ow2.asm:asm:6.2"
+    implementation "org.ow2.asm:asm-commons:6.2"
+    implementation "com.google.guava:guava:26.0-jre"
+    implementation 'org.slf4j:slf4j-api:1.7.25'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.25'
+
+    implementation 'org.apache.httpcomponents:httpclient:4.5.3'
+    implementation 'org.apache.httpcomponents:httpmime:4.5.3'
+    implementation 'org.apache.httpcomponents:httpasyncclient:4.1.4'
+    implementation 'org.jsoup:jsoup:1.10.3'
+    implementation 'org.json:json:20231013'
+
+    if (project.hasProperty("inspectGroup")) {
+        implementation "${project.inspectGroup}:${project.inspectName}:${project.inspectVersion}"
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('GadgetMiner')
+    archiveClassifier.set('')
+    manifest {
+        attributes(
+                'Class': 'gadgetinspector.GadgetInspector'
+        )
+    }
+}
+if (project.hasProperty("inspectConfig")) {
+    task runInspect(type: JavaExec) {
+        classpath = sourceSets.main.runtimeClasspath
+        main = "gadgetinspector.GadgetInspector"
+        args = ["--config", project.inspectConfig]
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
