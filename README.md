@@ -18,7 +18,7 @@ Static analysis tools often miss critical gadget chains because they cannot unde
 
 ### 2\. Expanded Sink Collection 😄
 
-`Gadget-Miner` significantly expands its knowledge base of sinks (attack endpoints) and can now identify, but is not limited to, the following vulnerability types:
+`Gadget-Miner` expands its knowledge base of sinks and can now identify, but is not limited to, the following vulnerability types:
 
 - **LDAP Injection**: e.g., `javax.naming.ldap.LdapContext.search()`
 - **Template Injection**: e.g., `freemarker.template.Template.process()`
@@ -31,7 +31,7 @@ Static analysis tools often miss critical gadget chains because they cannot unde
 A gap often exists between "theoretical" chains from static analysis and actual exploitability. `Gadget-Miner` introduces a dual-filter mechanism to address this:
 
 - **Pattern-based Filtering**: A set of refined rules is built-in to automatically filter out common false positive patterns known to arise from the limitations of static analysis.
-- **AI-Powered Analysis (Optional)**: By integrating with a large language model (Gemini), `Gadget-Miner` can submit discovered gadget chains to the AI for a semantic-level analysis of their exploitability.
+- **AI-Powered Analysis (Optional)**: By integrating with a large language model, `Gadget-Miner` can submit discovered gadget chains to the AI for a semantic-level analysis of their exploitability.
 
 ## 🔧 Installation and Configuration
 
@@ -52,10 +52,10 @@ A gap often exists between "theoretical" chains from static analysis and actual 
 
 `Gadget-Miner` is fully compatible with the original `Gadget Inspector`'s command-line usage.
 
-**To enable the AI analysis feature:** Pass your `Gemini API Key` using the `--api-key` argument.
+**To enable the AI analysis feature:** Pass your `API Key` using the `--api-key` argument(Currently only Gemini models are supported).
 
 ```bash
-java -jar build/libs/Gadget-Miner.jar --config jserial --api-key YOUR_GEMINI_API_KEY /path/to/your.jar
+java -jar build/libs/Gadget-Miner.jar --config jserial --api-key YOUR_API_KEY /path/to/your.jar
 ```
 
 After the analysis is complete, the AI's judgment results will be saved in JSON format in the `gadget-result/AI-gadget-chains-analysis-*.json` file.
