@@ -533,7 +533,6 @@ public class GadgetChainDiscovery {
   // ==================== 新增优化代码 START ====================
   /**
    * 将特定的 InvocationHandler 方法识别为 Sink 点。
-   * 例如，AnnotationInvocationHandler.equalsImpl 会调用代理对象的每一个方法，是非常危险的。
    */
   private boolean InvocationHandlerSlink(MethodReference.Handle method, InheritanceMap inheritanceMap) {
     // Jdk7u21 gadget chain uses AnnotationInvocationHandler.equalsImpl to proxy method calls.
@@ -541,8 +540,6 @@ public class GadgetChainDiscovery {
             && method.getName().equals("equalsImpl")) {
       return true;
     }
-
-    // 可以根据需要扩展其他危险的 InvocationHandler 实现
 
     return false;
   }

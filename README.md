@@ -1,8 +1,8 @@
 # Gadget-Miner 🛠️
 
-**[中文](https://www.google.com/search?q=%23chinese-version)** | **English**
+**[中文](https://github.com/PenguinFX/Gadget-Miner/blob/master/README_ch.md)** | **English**
 
-`Gadget-Miner` is a deep analysis tool for Java deserialization vulnerability exploit chains, serving as an enhancement and improvement upon the original [Gadget Inspector](https://github.com/JackOfMostTrades/gadgetinspector) project. This project aims to address the core blind spots in traditional static analysis by improving the **efficiency** and **accuracy** of vulnerability discovery through smarter taint analysis and broader attack surface coverage.
+`Gadget-Miner` is a deep analysis tool for Java deserialization vulnerability exploit chains, serving as an enhancement and improvement upon the original [Gadget Inspector](https://github.com/JackOfMostTrades/gadgetinspector) project.
 
 The work of this project is built upon the original `Gadget Inspector` and its derivative versions ([threedr3am](https://github.com/threedr3am/gadgetinspector), [5wimming](https://github.com/5wimming/gadgetinspector)).
 
@@ -12,9 +12,9 @@ The work of this project is built upon the original `Gadget Inspector` and its d
 
 Static analysis tools often miss critical gadget chains because they cannot understand some of Java's dynamic features. `Gadget-Miner` makes core improvements in the following areas:
 
-- **`transient` Field Analysis**: Static analysis tools typically ignore `transient` fields, causing taint analysis to break when developers restore these fields via a custom `readObject` method. `Gadget-Miner` can intelligently identify such cases and allow taints to propagate through these seemingly "non-serialized" fields.
+- **`transient` Field**: Static analysis tools typically ignore `transient` fields, causing taint analysis to break when developers restore these fields via a custom `readObject` method. `Gadget-Miner` can intelligently identify such cases and allow taints to propagate through these seemingly "non-serialized" fields.
 
-- **In-depth Analysis of Dynamic Proxies (InvocationHandler)**: `InvocationHandler` plays a central role in complex exploit chains like those in Commons-Collections. `Gadget-Miner` no longer treats it merely as a source but performs deep modeling from three perspectives: **optimizing taint propagation**, **enhancing sources**, and **adding new sinks**.
+- **Dynamic Proxies (InvocationHandler)**: `InvocationHandler` plays a central role in complex exploit chains like those in Commons-Collections. `Gadget-Miner` no longer treats it merely as a source but performs deep modeling from three perspectives: **optimizing taint propagation**, **enhancing sources**, and **adding new sinks**.
 
 ### 2\. Expanded Sink Collection 😄
 
@@ -35,16 +35,11 @@ A gap often exists between "theoretical" chains from static analysis and actual 
 
 ## 🔧 Installation and Configuration
 
-### Prerequisites
-
-- **JDK 8 or higher.**
-- (Optional, for AI features) A valid `Gemini API Key`.
-
 ### Installation Steps
 
 1.  **Download the project:**
     ```bash
-    git clone https://github.com/YourUsername/Gadget-Miner.git
+    git clone https://github.com/PenguinFX/Gadget-Miner.git
     cd Gadget-Miner
     ```
 2.  **Build the project:** Use Gradle to build the executable `jar` file.
@@ -60,14 +55,14 @@ A gap often exists between "theoretical" chains from static analysis and actual 
 **To enable the AI analysis feature:** Pass your `Gemini API Key` using the `--api-key` argument.
 
 ```bash
-java -jar build/libs/gadget-inspector-all.jar --config jserial --api-key YOUR_GEMINI_API_KEY /path/to/your.jar
+java -jar build/libs/Gadget-Miner.jar --config jserial --api-key YOUR_GEMINI_API_KEY /path/to/your.jar
 ```
 
 After the analysis is complete, the AI's judgment results will be saved in JSON format in the `gadget-result/AI-gadget-chains-analysis-*.json` file.
 
 ## 📜 License
 
-This project is licensed under the [MIT License](https://www.google.com/search?q=./LICENSE).
+This project is licensed under the [MIT License](https://github.com/PenguinFX/Gadget-Miner/blob/master/LICENSE).
 
 -----
 
